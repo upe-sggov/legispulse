@@ -1,5 +1,5 @@
 ---
-name: ar-sggov-platform
+name: legispulse
 description: Plataforma de consulta dos dados da Assembleia da Republica. Use sempre que o utilizador falar em continuar este projeto, descarregar dados da AR, normalizar JSONs do parlamento.pt, construir o dashboard ou modificar o pipeline (ingestao -> normalizacao -> DuckDB -> Streamlit/static). Tambem cobre publicacao via GitHub Actions no estilo do projeto "expert-groups-dashboard".
 ---
 
@@ -14,7 +14,7 @@ A utilizadora (Carolina) tem um catalogo oficial com **208 endpoints JSON** da A
 ## Arquitectura (medallion simplificado em Python)
 
 ```
-ar-sggov/
+legispulse/
 |- catalog/
 |   `- ar_sggov_full.json         # catalogo oficial dos 208 endpoints
 |- data/
@@ -116,7 +116,7 @@ SELECT * FROM read_parquet('data/normalized/iniciativas/**/*.parquet', hive_part
 
 ## Regra obrigatoria de registo (WORKLOG.md)
 
-Qualquer sessao que trabalhe neste projeto DEVE manter `WORKLOG.md` (na raiz de `ar-sggov/`) actualizado. Esta regra nao e opcional.
+Qualquer sessao que trabalhe neste projeto DEVE manter `WORKLOG.md` (na raiz de `legispulse/`) actualizado. Esta regra nao e opcional.
 
 1. **No inicio da sessao**: ler `WORKLOG.md` logo a seguir ao `SKILL.md` e verificar se o estado descrito bate certo com o estado real dos ficheiros (`data/raw/`, `data/schemas/`, `data/normalized/`, `db/`, `manifest.json`). Se divergir, corrigir o worklog antes de avancar com qualquer outro trabalho.
 2. **Durante a sessao**: registar decisoes relevantes e problemas encontrados a medida que ocorrem, para nao depender de memoria no fim.
@@ -179,12 +179,12 @@ Esta regra aplica-se tambem a documentacao nova escrita em .md. Ficheiros existe
 
 ## Ambientes: branches `main` (producao) e `dev` (desenvolvimento)
 
-O repo em <https://github.com/carolina-goes/ar-sggov> usa duas branches de longa duracao, correspondentes a dois ambientes:
+O repo em <https://github.com/upe-sggov/legispulse> usa duas branches de longa duracao, correspondentes a dois ambientes:
 
 | Branch | Ambiente | App Streamlit | Alteracoes |
 |---|---|---|---|
-| `main` | **Producao** | <https://ar-sg-gov-dssd-upe-v01.streamlit.app> | Apenas via Pull Request (ou bot do cron) |
-| `dev` | **Desenvolvimento** | app de preview (a criar: `ar-sg-gov-dssd-upe-dev.streamlit.app`) | Commits directos OK |
+| `main` | **Producao** | <https://legispulse.streamlit.app> | Apenas via Pull Request (ou bot do cron) |
+| `dev` | **Desenvolvimento** | app de preview (a criar: `legispulse.streamlit.app`) | Commits directos OK |
 
 **Regras de ouro**:
 

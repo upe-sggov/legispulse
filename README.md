@@ -1,6 +1,6 @@
 # AR-SGGOV — Plataforma de consulta da Assembleia da República
 
-**App online**: <https://ar-sg-gov-dssd-upe-v01.streamlit.app>
+**App online**: <https://legispulse.streamlit.app>
 
 Plataforma de consulta aberta sobre os dados oficiais da **Assembleia da República Portuguesa** (`app.parlamento.pt`), cobrindo **17 legislaturas** (I a XVII) e 16 categorias temáticas.
 
@@ -9,7 +9,7 @@ Pipeline: Python puro → Parquet particionado por legislatura → DuckDB → da
 ## Arquitectura
 
 ```
-ar-sggov/
+legispulse
 ├── catalog/                      # catálogo oficial dos 208 endpoints
 ├── scripts/                      # pipeline (download, profiling, normalização, load, calendário)
 ├── data/
