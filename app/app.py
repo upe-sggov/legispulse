@@ -1,5 +1,5 @@
 """
-AR-SGGOV — Dashboard Streamlit.
+LegisPulse — Dashboard Streamlit.
 
 Le db/ar.duckdb (read-only) e oferece quatro paginas:
   - Resumo: KPIs e distribuicao por GP/tipo
@@ -53,7 +53,7 @@ def _build_duckdb_if_missing() -> None:
     finally:
         con.close()
 
-st.set_page_config(page_title="AR-SGGOV", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="LegisPulse", layout="wide", initial_sidebar_state="expanded")
 
 # --- Estilo -------------------------------------------------------------
 st.markdown(
@@ -129,7 +129,7 @@ def download_button(df: pd.DataFrame, base_name: str, key: str | None = None) ->
 
 
 # --- Sidebar ------------------------------------------------------------
-st.sidebar.markdown("# AR-SGGOV")
+st.sidebar.markdown("# LegisPulse")
 st.sidebar.caption("Plataforma de consulta da Assembleia da República")
 
 pagina = st.sidebar.radio(

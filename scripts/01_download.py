@@ -45,7 +45,7 @@ def build_session() -> requests.Session:
         allowed_methods=["GET"],
     )
     s.mount("https://", HTTPAdapter(max_retries=retry))
-    s.headers.update({"User-Agent": "ar-sggov-ingestor/0.1 (local research)"})
+    s.headers.update({"User-Agent": "legispulse-ingestor/0.1 (local research)"})
     return s
 
 

@@ -1,4 +1,4 @@
-# AR-SGGOV — Plataforma de consulta da Assembleia da República
+# LegisPulse — Plataforma de consulta da Assembleia da República
 
 **App online**: <https://ar-sg-gov-dssd-upe-v01.streamlit.app>
 
@@ -9,7 +9,7 @@ Pipeline: Python puro → Parquet particionado por legislatura → DuckDB → da
 ## Arquitectura
 
 ```
-ar-sggov/
+legispulse/
 ├── catalog/                      # catálogo oficial dos 208 endpoints
 ├── scripts/                      # pipeline (download, profiling, normalização, load, calendário)
 ├── data/
