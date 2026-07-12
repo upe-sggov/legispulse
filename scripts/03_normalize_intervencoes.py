@@ -51,7 +51,7 @@ def flatten(row: dict, legislatura: str) -> dict:
     dep = row.get("Deputados") or {}
     conv = row.get("Convidados") or {}
     gov = row.get("MembrosGoverno") or {}
-    act_rel = row.get("ActividadesRelacionadas") or {}
+    act_rel_list = row.get("ActividadesRelacionadas") or []
 
     av_list = row.get("DadosAudiovisual") or []
     av0 = _first(av_list) or {}
@@ -89,10 +89,10 @@ def flatten(row: dict, legislatura: str) -> dict:
         "gov_nome": gov.get("nome"),
         "gov_cargo": gov.get("cargo"),
         "gov_governo": gov.get("governo"),
-        "actRel_id": act_rel.get("id"),
-        "actRel_tipo": act_rel.get("tipo"),
-        "actRel_autoresDeputados_json": _to_json(act_rel.get("autoresDeputados")),
-        "actRel_autoresGP_json": _to_json(act_rel.get("autoresGP")),
+        "actRel_id": [a.get("id") for a in act_rel_list if isinstance(a, dict)],
+        "actRel_tipo": [a.get("tipo") for a in act_rel_list if isinstance(a, dict)],
+        "actRel_autoresDeputados_json": _to_json([a.get("autoresDeputados") for a in act_rel_list if isinstance(a, dict)]),
+        "actRel_autoresGP_json": _to_json([a.get("autoresGP") for a in act_rel_list if isinstance(a, dict)]),
         "av_tipoIntervencao": av0.get("tipoIntervencao") if isinstance(av0, dict) else None,
         "av_assunto": av0.get("assunto") if isinstance(av0, dict) else None,
         "av_duracao": av0.get("duracao") if isinstance(av0, dict) else None,

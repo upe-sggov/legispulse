@@ -183,8 +183,8 @@ O repo em <https://github.com/upe-sggov/legispulse> usa duas branches de longa d
 
 | Branch | Ambiente | App Streamlit | Alteracoes |
 |---|---|---|---|
-| `main` | **Producao** | <https://ar-sg-gov-dssd-upe-v01.streamlit.app> | Apenas via Pull Request (ou bot do cron) |
-| `dev` | **Desenvolvimento** | app de preview (a criar: `ar-sg-gov-dssd-upe-dev.streamlit.app`) | Commits directos OK |
+| `main` | **Producao** | <https://legispulse.streamlit.app> | Apenas via Pull Request (ou bot do cron) |
+| `dev` | **Desenvolvimento** | app de preview (a criar: `legispulse-dev.streamlit.app`) | Commits directos OK |
 
 **Regras de ouro**:
 
