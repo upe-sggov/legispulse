@@ -1,13 +1,13 @@
 ---
-name: legispulse
+name: legispulse-platform
 description: Plataforma de consulta dos dados da Assembleia da Republica. Use sempre que o utilizador falar em continuar este projeto, descarregar dados da AR, normalizar JSONs do parlamento.pt, construir o dashboard ou modificar o pipeline (ingestao -> normalizacao -> DuckDB -> Streamlit/static). Tambem cobre publicacao via GitHub Actions no estilo do projeto "expert-groups-dashboard".
 ---
 
-# AR-SGGOV — Plataforma de consulta da Assembleia da Republica
+# LegisPulse — Plataforma de consulta da Assembleia da Republica
 
 ## Contexto e objectivo
 
-A utilizadora (Carolina) tem um catalogo oficial com **208 endpoints JSON** da Assembleia da Republica Portuguesa (`app.parlamento.pt`), cobrindo **17 legislaturas** e 16 categorias tematicas. O objectivo e construir uma plataforma **estatica, publica, auto-actualizavel** que permita consultar estes dados — semelhante ao repo `carolina-goes/expert-groups-dashboard` (GitHub Actions + dashboard estatico).
+O utilizador (UPE) tem um catalogo oficial com **208 endpoints JSON** da Assembleia da Republica Portuguesa (`app.parlamento.pt`), cobrindo **17 legislaturas** e 16 categorias tematicas. O objectivo e construir uma plataforma **estatica, publica, auto-actualizavel** que permita consultar estes dados — semelhante ao repo `upe-sggov/expert-groups-dashboard` (GitHub Actions + dashboard estatico).
 
 **Tentativas anteriores abandonadas**: Microsoft Fabric (Lakehouse + medallion). Razao: schemas demasiado aninhados e variaveis entre legislaturas tornaram o trabalho em Spark/notebooks demasiado lento. Abordagem actual e Python puro, local-first, com publicacao via GitHub Pages + Actions.
 
@@ -45,7 +45,7 @@ Legislaturas cobertas: 01 a 17 (I a XVII). As recentes (XIII-XVII) sao as mais c
 3. **DuckDB** como motor de query (zero-config, rapido em analytics, le parquet directamente).
 4. **Streamlit** como UI inicial. Alternativa futura: frontend estatico (HTML/JS) consumindo JSONs/parquet, no estilo do `expert-groups-dashboard`.
 5. **Nao normalizar a cegas**: correr primeiro `02_profile_schemas.py` para perceber o aninhamento antes de escrever cada normalizador.
-6. **User-Agent** nos requests: `ar-sggov-ingestor/0.1 (local research)`. Rate-limit de 0.3s entre requests.
+6. **User-Agent** nos requests: `legispulse-ingestor/0.1 (local research)`. Rate-limit de 0.3s entre requests.
 
 ## Estrategia para schemas aninhados
 
@@ -184,7 +184,7 @@ O repo em <https://github.com/upe-sggov/legispulse> usa duas branches de longa d
 | Branch | Ambiente | App Streamlit | Alteracoes |
 |---|---|---|---|
 | `main` | **Producao** | <https://legispulse.streamlit.app> | Apenas via Pull Request (ou bot do cron) |
-| `dev` | **Desenvolvimento** | app de preview (a criar: `legispulse.streamlit.app`) | Commits directos OK |
+| `dev` | **Desenvolvimento** | app de preview (a criar: `legispulse-dev.streamlit.app`) | Commits directos OK |
 
 **Regras de ouro**:
 
@@ -233,5 +233,5 @@ Se configurarmos "Require PR" em main, o cron diario (que usa o GITHUB_TOKEN) ta
 ## Referencias
 
 - Catalogo: `catalog/ar_sggov_full.json` (fields: `json` URL, `filename` no formato `{NN}_{categoria}`)
-- Projecto irmao: `carolina-goes/expert-groups-dashboard` — seguir o mesmo padrao de GitHub Actions + dashboard estatico.
+- Projecto irmao: `upe-sggov/expert-groups-dashboard` — seguir o mesmo padrao de GitHub Actions + dashboard estatico.
 - API base da AR: `https://app.parlamento.pt/webutils/docs/doc.txt?path=...&fich=...&Inline=true` (nao e REST, sao URLs pre-assinadas no catalogo).

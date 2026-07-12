@@ -1,4 +1,4 @@
-# Dependencias Python do projeto AR-SGGOV.
+# Dependencias Python do projeto LegisPulse.
 # Instalar com:  pip install -r requirements.txt
 # Versionado livremente nas minor — fixar versoes exactas se for usado em CI/Docker.
 

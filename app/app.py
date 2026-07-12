@@ -1,5 +1,5 @@
 """
-AR-SGGOV — Dashboard Streamlit.
+LegisPulse — Dashboard Streamlit.
 
 Le db/ar.duckdb (read-only) e oferece quatro paginas:
   - Resumo: KPIs e distribuicao por GP/tipo
@@ -53,7 +53,7 @@ def _build_duckdb_if_missing() -> None:
     finally:
         con.close()
 
-st.set_page_config(page_title="AR-SGGOV", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="LegisPulse", layout="wide", initial_sidebar_state="expanded")
 
 # --- Estilo -------------------------------------------------------------
 st.markdown(
@@ -129,7 +129,7 @@ def download_button(df: pd.DataFrame, base_name: str, key: str | None = None) ->
 
 
 # --- Sidebar ------------------------------------------------------------
-st.sidebar.markdown("# AR-SGGOV")
+st.sidebar.markdown("# LegisPulse")
 st.sidebar.caption("Plataforma de consulta da Assembleia da República")
 
 pagina = st.sidebar.radio(
@@ -210,7 +210,7 @@ if pagina == "Resumo":
         fig = px.bar(df, x="GP", y="n", color="GP", color_discrete_map=color_map(df["GP"]))
         fig.update_layout(showlegend=False, height=320, margin=dict(t=10, b=10, l=10, r=10),
                           plot_bgcolor="white", xaxis_title=None, yaxis_title=None)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with col_b:
         st.markdown("### Intervenções por grupo parlamentar")
@@ -221,14 +221,14 @@ if pagina == "Resumo":
         fig = px.bar(df, x="GP", y="n", color="GP", color_discrete_map=color_map(df["GP"]))
         fig.update_layout(showlegend=False, height=320, margin=dict(t=10, b=10, l=10, r=10),
                           plot_bgcolor="white", xaxis_title=None, yaxis_title=None)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.markdown("### Iniciativas por tipo")
     df = q(
         "SELECT IniDescTipo Tipo, COUNT(*) Total FROM iniciativas WHERE _legislatura=? AND IniDescTipo IS NOT NULL GROUP BY 1 ORDER BY Total DESC",
         (leg,),
     )
-    st.dataframe(df, use_container_width=True, hide_index=True, height=260)
+    st.dataframe(df, width='stretch', hide_index=True, height=260)
 
 
 # =======================================================================
@@ -352,10 +352,10 @@ elif pagina == "Iniciativas":
         fig.update_layout(height=180, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
         fig.update_traces(marker_color="#2b6cb0")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.dataframe(
-        df, use_container_width=True, hide_index=True, height=440,
+        df, width='stretch', hide_index=True, height=440,
         column_config={
             "nr": st.column_config.TextColumn("Nº"),
             "tipo": st.column_config.TextColumn("Tipo"),
@@ -491,11 +491,11 @@ elif pagina == "Votações":
                      color_discrete_map={"Aprovado": "#2b8a3e", "Rejeitado": "#c92a2a", "Prejudicado": "#868e96"})
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend_title_text="")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.dataframe(
         df.drop(columns=["ini_id"]),
-        use_container_width=True, hide_index=True, height=460,
+        width='stretch', hide_index=True, height=460,
         column_config={
             "nr": st.column_config.TextColumn("Nº"),
             "tipo": st.column_config.TextColumn("Tipo"),
@@ -618,10 +618,10 @@ elif pagina == "Intervenções":
         fig = px.bar(agg, x="dia", y="n", color="gp", color_discrete_map=color_map(df["gp"].dropna().unique()))
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.2))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.dataframe(
-        df, use_container_width=True, hide_index=True, height=420,
+        df, width='stretch', hide_index=True, height=420,
         column_config={
             "data_reu": st.column_config.DateColumn("Data", format="YYYY-MM-DD"),
             "gp": st.column_config.TextColumn("GP"),
@@ -789,10 +789,10 @@ elif pagina == "Perguntas e requerimentos":
         fig.update_layout(height=200, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
         fig.update_traces(marker_color="#2b6cb0")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.dataframe(
-        df.drop(columns=["id_p"]), use_container_width=True, hide_index=True, height=440,
+        df.drop(columns=["id_p"]), width='stretch', hide_index=True, height=440,
         column_config={
             "nr": st.column_config.TextColumn("Nº"),
             "tipo": st.column_config.TextColumn("Tipo"),
@@ -886,10 +886,10 @@ elif pagina == "Petições":
         fig.update_layout(height=200, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
         fig.update_traces(marker_color="#2b6cb0")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.dataframe(
-        df, use_container_width=True, hide_index=True, height=440,
+        df, width='stretch', hide_index=True, height=440,
         column_config={
             "nr": st.column_config.TextColumn("Nº"),
             "data_ent": st.column_config.DateColumn("Entrada", format="YYYY-MM-DD"),
@@ -989,10 +989,10 @@ elif pagina == "Diplomas aprovados":
         fig = px.bar(agg, x="mes", y="n", color="tipo")
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.25))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.dataframe(
-        df, use_container_width=True, hide_index=True, height=440,
+        df, width='stretch', hide_index=True, height=440,
         column_config={
             "tipo": st.column_config.TextColumn("Tipo"),
             "numero": st.column_config.TextColumn("Número"),
@@ -1087,10 +1087,10 @@ elif pagina == "Agenda parlamentar":
         fig = px.bar(agg, x="dia", y="n", color="seccao")
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.25))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     st.dataframe(
-        df, use_container_width=True, hide_index=True, height=440,
+        df, width='stretch', hide_index=True, height=440,
         column_config={
             "inicio": st.column_config.DatetimeColumn("Início", format="YYYY-MM-DD HH:mm"),
             "fim": st.column_config.DatetimeColumn("Fim", format="YYYY-MM-DD HH:mm"),
@@ -1198,8 +1198,8 @@ elif pagina == "Atividades":
                 fig.update_layout(height=180, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                                   xaxis_title=None, yaxis_title=None)
                 fig.update_traces(marker_color="#2b6cb0")
-                st.plotly_chart(fig, use_container_width=True)
-            st.dataframe(df[cols_show], use_container_width=True, hide_index=True, height=420)
+                st.plotly_chart(fig, width='stretch')
+            st.dataframe(df[cols_show], width='stretch', hide_index=True, height=420)
             download_button(df[cols_show], f"{table_name}_leg{leg}", key=f"dl_{table_name}")
 
     _atividade_view(tab_audic, "atividades_audicoes", "Audições", "at_audic",
@@ -1296,7 +1296,7 @@ elif pagina == "Órgãos e comissões":
     k2.metric("Tipos", detalhe["tipo_orgao"].nunique() if not detalhe.empty else 0)
 
     st.markdown("### Órgãos")
-    st.dataframe(detalhe[cols_det], use_container_width=True, hide_index=True, height=300)
+    st.dataframe(detalhe[cols_det], width='stretch', hide_index=True, height=300)
     download_button(detalhe[cols_det], f"orgaos_detalhe_leg{leg}", key="dl_orgaos_det")
 
     st.markdown("### Histórico de composição (membros)")
@@ -1318,7 +1318,7 @@ elif pagina == "Órgãos e comissões":
     cols_comp = [c for c in comp.columns if not c.startswith("_") and not c.endswith("_json")]
     k3.metric("Membros (filtrado)", f"{len(comp):,}")
     st.caption(f"{len(comp):,} registos (máximo 2000)")
-    st.dataframe(comp[cols_comp], use_container_width=True, hide_index=True, height=420)
+    st.dataframe(comp[cols_comp], width='stretch', hide_index=True, height=420)
     download_button(comp[cols_comp], f"orgaos_historico_composicao_leg{leg}", key="dl_orgaos_comp")
 
 
@@ -1366,7 +1366,7 @@ elif pagina == "Delegações e visitas":
         )
         st.metric("Delegações eventuais", f"{len(df):,}")
         st.dataframe(
-            df, use_container_width=True, hide_index=True, height=400,
+            df, width='stretch', hide_index=True, height=400,
             column_config={
                 "data_inicio": st.column_config.DateColumn("Início", format="YYYY-MM-DD"),
                 "data_fim": st.column_config.DateColumn("Fim", format="YYYY-MM-DD"),
@@ -1379,7 +1379,7 @@ elif pagina == "Delegações e visitas":
         sel_id = st.selectbox("Ver participantes da delegação", [""] + df["Id"].astype(str).tolist(), key="dev_sel")
         if sel_id:
             parts = q("SELECT Nome, Gp, Tipo FROM delegacao_eventual_participantes WHERE _legislatura=? AND Id=?", (leg, sel_id))
-            st.dataframe(parts, use_container_width=True, hide_index=True, height=240)
+            st.dataframe(parts, width='stretch', hide_index=True, height=240)
 
     with tab_dep:
         # Filtros: Sessão + pesquisa no nome
@@ -1403,7 +1403,7 @@ elif pagina == "Delegações e visitas":
         )
         st.metric("Delegações permanentes", f"{len(df):,}")
         st.dataframe(
-            df, use_container_width=True, hide_index=True, height=440,
+            df, width='stretch', hide_index=True, height=440,
             column_config={
                 "data_eleicao": st.column_config.DateColumn("Data eleição", format="YYYY-MM-DD"),
                 "Nome": st.column_config.TextColumn("Nome", width="large"),
@@ -1434,7 +1434,7 @@ elif pagina == "Delegações e visitas":
         )
         st.metric("Grupos de amizade", f"{len(df):,}")
         st.dataframe(
-            df, use_container_width=True, hide_index=True, height=400,
+            df, width='stretch', hide_index=True, height=400,
             column_config={
                 "data_criacao": st.column_config.DateColumn("Data criação", format="YYYY-MM-DD"),
                 "Nome": st.column_config.TextColumn("Nome", width="large"),
@@ -1446,7 +1446,7 @@ elif pagina == "Delegações e visitas":
         if sel_id:
             comp = q("SELECT Nome, Gp, Cargo, DataInicio, DataFim FROM grupo_amizade_composicao WHERE _legislatura=? AND Id=? ORDER BY Cargo", (leg, sel_id))
             st.dataframe(
-                comp, use_container_width=True, hide_index=True, height=300,
+                comp, width='stretch', hide_index=True, height=300,
                 column_config={
                     "DataInicio": st.column_config.DateColumn("Início", format="YYYY-MM-DD"),
                     "DataFim": st.column_config.DateColumn("Fim", format="YYYY-MM-DD"),
@@ -1489,7 +1489,7 @@ elif pagina == "Delegações e visitas":
         )
         st.metric("Reuniões/visitas", f"{len(df):,}")
         st.dataframe(
-            df, use_container_width=True, hide_index=True, height=440,
+            df, width='stretch', hide_index=True, height=440,
             column_config={
                 "data_inicio": st.column_config.DateColumn("Início", format="YYYY-MM-DD"),
                 "data_fim": st.column_config.DateColumn("Fim", format="YYYY-MM-DD"),
@@ -1551,7 +1551,7 @@ elif pagina == "Orçamento do Estado":
     k3.metric("Estados", df["Estado"].nunique() if not df.empty else 0)
 
     st.dataframe(
-        df, use_container_width=True, hide_index=True, height=480,
+        df, width='stretch', hide_index=True, height=480,
         column_config={
             "ID": st.column_config.TextColumn("ID"),
             "ID_Pai": st.column_config.TextColumn("ID pai"),
@@ -1623,7 +1623,7 @@ elif pagina == "Perfil de deputado":
                 (leg, str(int(cad_id))),
             )
             st.dataframe(
-                ini, use_container_width=True, hide_index=True, height=440,
+                ini, width='stretch', hide_index=True, height=440,
                 column_config={
                     "nr": st.column_config.TextColumn("Nº"),
                     "tipo": st.column_config.TextColumn("Tipo"),
@@ -1646,7 +1646,7 @@ elif pagina == "Perfil de deputado":
                 (leg, str(int(cad_id))),
             )
             st.dataframe(
-                inte, use_container_width=True, hide_index=True, height=440,
+                inte, width='stretch', hide_index=True, height=440,
                 column_config={
                     "data_reu": st.column_config.DateColumn("Data", format="YYYY-MM-DD"),
                     "tipo": st.column_config.TextColumn("Tipo"),
@@ -1673,7 +1673,7 @@ elif pagina == "Perfil de deputado":
             )
             st.caption(f"{len(perg):,} perguntas/requerimentos subscritos.")
             st.dataframe(
-                perg, use_container_width=True, hide_index=True, height=440,
+                perg, width='stretch', hide_index=True, height=440,
                 column_config={
                     "nr": st.column_config.TextColumn("Nº"),
                     "tipo": st.column_config.TextColumn("Tipo"),
@@ -1717,7 +1717,7 @@ elif pagina == "Perfil de deputado":
             c2.metric("Audições", f"{len(audi):,}")
             st.markdown("### Audiências")
             st.dataframe(
-                aud, use_container_width=True, hide_index=True, height=280,
+                aud, width='stretch', hide_index=True, height=280,
                 column_config={
                     "assunto": st.column_config.TextColumn("Assunto", width="large"),
                     "data_entrada": st.column_config.DateColumn("Data", format="YYYY-MM-DD"),
@@ -1729,7 +1729,7 @@ elif pagina == "Perfil de deputado":
             download_button(aud, f"deputado_{int(cad_id)}_audiencias_leg{leg}", key="dl_prof_aud")
             st.markdown("### Audições")
             st.dataframe(
-                audi, use_container_width=True, hide_index=True, height=280,
+                audi, width='stretch', hide_index=True, height=280,
                 column_config={
                     "assunto": st.column_config.TextColumn("Assunto", width="large"),
                     "data_entrada": st.column_config.DateColumn("Data", format="YYYY-MM-DD"),
@@ -1755,7 +1755,7 @@ elif pagina == "Perfil de deputado":
             if not traj.empty:
                 st.caption(f"{len(traj):,} períodos de filiação em grupos parlamentares nesta legislatura.")
                 st.dataframe(
-                    traj, use_container_width=True, hide_index=True, height=240,
+                    traj, width='stretch', hide_index=True, height=240,
                     column_config={
                         "gp": st.column_config.TextColumn("Grupo parlamentar"),
                         "data_inicio": st.column_config.DateColumn("Início", format="YYYY-MM-DD"),
@@ -1771,7 +1771,7 @@ elif pagina == "Perfil de deputado":
                     fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10),
                                       showlegend=False, plot_bgcolor="white",
                                       xaxis_title=None, yaxis_title=None)
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width='stretch')
                 download_button(traj, f"deputado_{int(cad_id)}_trajetoria_gp_leg{leg}", key="dl_prof_gp")
             else:
                 st.info("Sem registos de trajetória de GP para este deputado nesta legislatura.")
@@ -1791,7 +1791,7 @@ elif pagina == "Perfil de deputado":
                 fig.update_layout(height=320, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                                   xaxis_title=None, yaxis_title=None)
                 fig.update_traces(marker_color="#2b6cb0")
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
 
 
 # =======================================================================
@@ -1854,7 +1854,7 @@ elif pagina == "Descarregar dados":
 
         st.markdown("### Pré-visualização (primeiras 100 linhas)")
         preview = q(f'SELECT * FROM "{sel_tabela}"{where_sql} LIMIT 100', tuple(params_sql))
-        st.dataframe(preview, use_container_width=True, hide_index=True, height=350)
+        st.dataframe(preview, width='stretch', hide_index=True, height=350)
 
         st.markdown("### Descarregar")
         full = q(f'SELECT * FROM "{sel_tabela}"{where_sql}', tuple(params_sql))

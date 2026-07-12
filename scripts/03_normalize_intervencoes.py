@@ -89,12 +89,8 @@ def flatten(row: dict, legislatura: str) -> dict:
         "gov_nome": gov.get("nome"),
         "gov_cargo": gov.get("cargo"),
         "gov_governo": gov.get("governo"),
-        "actRel_ids": _to_json(
-            [a.get("id") for a in act_rel_list if isinstance(a, dict)]
-        ),
-        "actRel_tipo": _to_json(
-            [a.get("tipo") for a in act_rel_list if isinstance(a, dict)]
-        ),
+        "actRel_id": [a.get("id") for a in act_rel_list if isinstance(a, dict)],
+        "actRel_tipo": [a.get("tipo") for a in act_rel_list if isinstance(a, dict)],
         "actRel_autoresDeputados_json": _to_json([a.get("autoresDeputados") for a in act_rel_list if isinstance(a, dict)]),
         "actRel_autoresGP_json": _to_json([a.get("autoresGP") for a in act_rel_list if isinstance(a, dict)]),
         "av_tipoIntervencao": av0.get("tipoIntervencao") if isinstance(av0, dict) else None,

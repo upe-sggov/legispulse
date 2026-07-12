@@ -41,5 +41,5 @@ credentials.json
 logs/
 *.log
 
-# Tests
+# Testes
 test/
