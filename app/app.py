@@ -18,7 +18,7 @@ import duckdb
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-import numpy as np
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "db" / "ar.duckdb"
