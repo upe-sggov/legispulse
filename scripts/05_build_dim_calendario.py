@@ -71,8 +71,17 @@ def discover_min_date() -> date:
 
 
 def build() -> pd.DataFrame:
-    start = discover_min_date()
-    end = date.today() + timedelta(days=365)
+
+    MIN_TS = pd.Timestamp("1677-09-21")
+    MAX_TS = pd.Timestamp("2262-04-11")
+
+    #start = discover_min_date()
+    #end = date.today() + timedelta(days=365)
+
+    start = max(discover_min_date(), MIN_TS)
+    end = min(date.today() + timedelta(days=365), MAX_TS)
+
+
     idx = pd.date_range(start=start, end=end, freq="D")
     df = pd.DataFrame({"data": idx.date})
     ts = pd.to_datetime(df["data"])
