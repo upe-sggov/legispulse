@@ -18,6 +18,7 @@ import duckdb
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "db" / "ar.duckdb"
@@ -210,7 +211,12 @@ if pagina == "Resumo":
         fig = px.bar(df, x="GP", y="n", color="GP", color_discrete_map=color_map(df["GP"]))
         fig.update_layout(showlegend=False, height=320, margin=dict(t=10, b=10, l=10, r=10),
                           plot_bgcolor="white", xaxis_title=None, yaxis_title=None)
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     with col_b:
         st.markdown("### Intervenções por grupo parlamentar")
@@ -221,7 +227,12 @@ if pagina == "Resumo":
         fig = px.bar(df, x="GP", y="n", color="GP", color_discrete_map=color_map(df["GP"]))
         fig.update_layout(showlegend=False, height=320, margin=dict(t=10, b=10, l=10, r=10),
                           plot_bgcolor="white", xaxis_title=None, yaxis_title=None)
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.markdown("### Iniciativas por tipo")
     df = q(
@@ -352,7 +363,12 @@ elif pagina == "Iniciativas":
         fig.update_layout(height=180, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
         fig.update_traces(marker_color="#2b6cb0")
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.dataframe(
         df, width='stretch', hide_index=True, height=440,
@@ -491,7 +507,12 @@ elif pagina == "Votações":
                      color_discrete_map={"Aprovado": "#2b8a3e", "Rejeitado": "#c92a2a", "Prejudicado": "#868e96"})
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend_title_text="")
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.dataframe(
         df.drop(columns=["ini_id"]),
@@ -618,7 +639,12 @@ elif pagina == "Intervenções":
         fig = px.bar(agg, x="dia", y="n", color="gp", color_discrete_map=color_map(df["gp"].dropna().unique()))
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.2))
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.dataframe(
         df, width='stretch', hide_index=True, height=420,
@@ -789,7 +815,12 @@ elif pagina == "Perguntas e requerimentos":
         fig.update_layout(height=200, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
         fig.update_traces(marker_color="#2b6cb0")
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.dataframe(
         df.drop(columns=["id_p"]), width='stretch', hide_index=True, height=440,
@@ -876,7 +907,21 @@ elif pagina == "Petições":
     k1.metric("Resultados", f"{len(df):,}")
     k2.metric("Situações", df["situacao"].nunique() if not df.empty else 0)
     k3.metric("Total assinaturas", f"{int(df['assinaturas'].sum(skipna=True)):,}" if not df.empty else "0")
-    k4.metric("Mediana assin.", f"{int(df['assinaturas'].median(skipna=True)):,}" if not df.empty and df["assinaturas"].notna().any() else "—")
+    #k4.metric("Mediana assin.", f"{int(df['assinaturas'].median(skipna=True)):,}" if not df.empty and df["assinaturas"].notna().any() else "—")
+
+    df["assinaturas"] = df["assinaturas"].astype("object")
+    vals = [v for v in df["assinaturas"] if pd.notna(v)]
+    vals_sorted = sorted(vals)
+    n = len(vals_sorted)
+
+    if n == 0:
+        mediana = None
+    elif n % 2 == 1:
+        mediana = vals_sorted[n // 2]
+    else:
+        mediana = (vals_sorted[n//2 - 1] + vals_sorted[n//2]) // 2
+
+    k4.metric("Mediana assin.", f"{int(mediana):,}" if mediana is not None else "—")
 
     if not df.empty and df["data_ent"].notna().any():
         ts = df.copy()
@@ -886,7 +931,12 @@ elif pagina == "Petições":
         fig.update_layout(height=200, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
         fig.update_traces(marker_color="#2b6cb0")
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.dataframe(
         df, width='stretch', hide_index=True, height=440,
@@ -989,7 +1039,12 @@ elif pagina == "Diplomas aprovados":
         fig = px.bar(agg, x="mes", y="n", color="tipo")
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.25))
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.dataframe(
         df, width='stretch', hide_index=True, height=440,
@@ -1087,7 +1142,12 @@ elif pagina == "Agenda parlamentar":
         fig = px.bar(agg, x="dia", y="n", color="seccao")
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.25))
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, config={
+            "width": 'stretch',
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "staticPlot": False
+        })
 
     st.dataframe(
         df, width='stretch', hide_index=True, height=440,
@@ -1198,7 +1258,12 @@ elif pagina == "Atividades":
                 fig.update_layout(height=180, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                                   xaxis_title=None, yaxis_title=None)
                 fig.update_traces(marker_color="#2b6cb0")
-                st.plotly_chart(fig, width='stretch')
+                st.plotly_chart(fig, config={
+                    "width": 'stretch',
+                    "displayModeBar": False,
+                    "scrollZoom": False,
+                    "staticPlot": False
+                })
             st.dataframe(df[cols_show], width='stretch', hide_index=True, height=420)
             download_button(df[cols_show], f"{table_name}_leg{leg}", key=f"dl_{table_name}")
 
@@ -1771,7 +1836,12 @@ elif pagina == "Perfil de deputado":
                     fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10),
                                       showlegend=False, plot_bgcolor="white",
                                       xaxis_title=None, yaxis_title=None)
-                    st.plotly_chart(fig, width='stretch')
+                    st.plotly_chart(fig, config={
+                        "width": 'stretch',
+                        "displayModeBar": False,
+                        "scrollZoom": False,
+                        "staticPlot": False
+                    })
                 download_button(traj, f"deputado_{int(cad_id)}_trajetoria_gp_leg{leg}", key="dl_prof_gp")
             else:
                 st.info("Sem registos de trajetória de GP para este deputado nesta legislatura.")
@@ -1791,7 +1861,12 @@ elif pagina == "Perfil de deputado":
                 fig.update_layout(height=320, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                                   xaxis_title=None, yaxis_title=None)
                 fig.update_traces(marker_color="#2b6cb0")
-                st.plotly_chart(fig, width='stretch')
+                st.plotly_chart(fig, config={
+                    "width": 'stretch',
+                    "displayModeBar": False,
+                    "scrollZoom": False,
+                    "staticPlot": False
+                })
 
 
 # =======================================================================
