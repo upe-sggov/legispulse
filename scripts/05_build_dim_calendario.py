@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
+from tracemalloc import start
 
 import duckdb
 import pandas as pd
@@ -72,14 +73,15 @@ def discover_min_date() -> date:
 
 def build() -> pd.DataFrame:
 
-    MIN_TS = pd.Timestamp("1975-04-25").date()
+    MIN_TS = pd.Timestamp("1975-04-25")
 
-    #start = discover_min_date()
-    #end = date.today() + timedelta(days=365)
+    raw_start = discover_min_date()
+    raw_end = date.today() + timedelta(days=365)
 
-    start = max(discover_min_date(), MIN_TS)
-    end = date.today() + timedelta(days=365)
+    start = pd.Timestamp(raw_start)
+    end = pd.Timestamp(raw_end)
 
+    start = max(start, MIN_TS)
 
     idx = pd.date_range(start=start, end=end, freq="D")
     df = pd.DataFrame({"data": idx.date})
