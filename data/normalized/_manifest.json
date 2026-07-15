@@ -2109,7 +2109,7 @@
     "source_file": null,
     "source_sha256": null,
     "normalizer": "05_build_dim_calendario.py",
-    "generated_at": "2026-07-15T08:55:45.688692Z"
+    "generated_at": "2026-07-15T09:22:34.352069Z"
   },
   {
     "table": "diploma_iniciativas",
