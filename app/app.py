@@ -364,7 +364,7 @@ elif pagina == "Iniciativas":
         fig = px.bar(agg, x="mes", y="n")
         fig.update_layout(height=180, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
-        fig.update_traces(marker_color="#2b6cb0", width=0.8)
+        fig.update_traces(marker_color="#2b6cb0")
         st.plotly_chart(fig, config={
             "width": 'stretch',
             "displayModeBar": False,
@@ -509,7 +509,6 @@ elif pagina == "Votações":
                      color_discrete_map={"Aprovado": "#2b8a3e", "Rejeitado": "#c92a2a", "Prejudicado": "#868e96"})
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend_title_text="")
-        fig.update_traces(width=0.8)
         st.plotly_chart(fig, config={
             "width": 'stretch',
             "displayModeBar": False,
@@ -642,7 +641,6 @@ elif pagina == "Intervenções":
         fig = px.bar(agg, x="dia", y="n", color="gp", color_discrete_map=color_map(df["gp"].dropna().unique()))
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.2))
-        fig.update_traces(width=0.8)
         st.plotly_chart(fig, config={
             "width": 'stretch',
             "displayModeBar": False,
@@ -818,7 +816,7 @@ elif pagina == "Perguntas e requerimentos":
         fig = px.bar(agg, x="mes", y="n")
         fig.update_layout(height=200, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
-        fig.update_traces(marker_color="#2b6cb0",width=0.8)
+        fig.update_traces(marker_color="#2b6cb0")
         st.plotly_chart(fig, config={
             "width": 'stretch',
             "displayModeBar": False,
@@ -934,7 +932,7 @@ elif pagina == "Petições":
         fig = px.bar(agg, x="mes", y="n")
         fig.update_layout(height=200, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None)
-        fig.update_traces(marker_color="#2b6cb0", width=0.8)
+        fig.update_traces(marker_color="#2b6cb0")
         st.plotly_chart(fig, config={
             "width": 'stretch',
             "displayModeBar": False,
@@ -1043,7 +1041,6 @@ elif pagina == "Diplomas aprovados":
         fig = px.bar(agg, x="mes", y="n", color="tipo")
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.25))
-        fig.update_traces(width=0.8)
         st.plotly_chart(fig, config={
             "width": 'stretch',
             "displayModeBar": False,
@@ -1147,7 +1144,6 @@ elif pagina == "Agenda parlamentar":
         fig = px.bar(agg, x="dia", y="n", color="seccao")
         fig.update_layout(height=220, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                           xaxis_title=None, yaxis_title=None, legend=dict(orientation="h", y=-0.25))
-        fig.update_traces(width=0.8)
         st.plotly_chart(fig, config={
             "width": 'stretch',
             "displayModeBar": False,
@@ -1263,7 +1259,7 @@ elif pagina == "Atividades":
                 fig = px.bar(agg, x="mes", y="n")
                 fig.update_layout(height=180, margin=dict(t=10, b=10, l=10, r=10), plot_bgcolor="white",
                                   xaxis_title=None, yaxis_title=None)
-                fig.update_traces(marker_color="#2b6cb0", width=0.8)
+                fig.update_traces(marker_color="#2b6cb0")
                 st.plotly_chart(fig, config={
                     "width": 'stretch',
                     "displayModeBar": False,
