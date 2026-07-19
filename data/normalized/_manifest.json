@@ -2104,12 +2104,12 @@
     "table": "dim_calendario",
     "legislatura": null,
     "path": "data/normalized/dim_calendario/part.parquet",
-    "rows": 19078,
+    "rows": 19079,
     "columns": 14,
     "source_file": null,
     "source_sha256": null,
     "normalizer": "05_build_dim_calendario.py",
-    "generated_at": "2026-07-18T10:05:36.834937Z"
+    "generated_at": "2026-07-19T10:17:33.739255Z"
   },
   {
     "table": "diploma_iniciativas",
