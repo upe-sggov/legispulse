@@ -1909,9 +1909,9 @@
     "rows": 1446,
     "columns": 23,
     "source_file": "data/raw/17/atividade_dos_deputados.json",
-    "source_sha256": "709925c05b278e29e21a8aa23dbbfa69b79c3b7f1494062bfdd81f3f7ce39ca8",
+    "source_sha256": "a453c987e7143105083f4e377d29210d531760beadacbd0f42352bdb8fad315d",
     "normalizer": "03_normalize_atividade_dos_deputados.py",
-    "generated_at": "2026-08-22T05:19:12.723441Z"
+    "generated_at": "2026-08-23T05:20:59.614517Z"
   },
   {
     "table": "deputados",
@@ -2096,20 +2096,20 @@
     "rows": 1446,
     "columns": 17,
     "source_file": "data/raw/17/atividade_dos_deputados.json",
-    "source_sha256": "709925c05b278e29e21a8aa23dbbfa69b79c3b7f1494062bfdd81f3f7ce39ca8",
+    "source_sha256": "a453c987e7143105083f4e377d29210d531760beadacbd0f42352bdb8fad315d",
     "normalizer": "03_normalize_atividade_dos_deputados.py",
-    "generated_at": "2026-08-22T05:19:12.710920Z"
+    "generated_at": "2026-08-23T05:20:59.602160Z"
   },
   {
     "table": "dim_calendario",
     "legislatura": null,
     "path": "data/normalized/dim_calendario/part.parquet",
-    "rows": 19113,
+    "rows": 19114,
     "columns": 14,
     "source_file": null,
     "source_sha256": null,
     "normalizer": "05_build_dim_calendario.py",
-    "generated_at": "2026-08-22T05:19:16.979066Z"
+    "generated_at": "2026-08-23T05:21:03.903671Z"
   },
   {
     "table": "diploma_iniciativas",
@@ -4131,9 +4131,9 @@
     "rows": 1251,
     "columns": 8,
     "source_file": "data/raw/17/iniciativas.json",
-    "source_sha256": "43c89a33e4f0865af7f98da7865e852eab81081d0f67c2ca8fa505c131306b45",
+    "source_sha256": "71bc3684ea16898f5c9e8a2fbbabb452be076ce31742f27898c0522f9fc5a2f8",
     "normalizer": "03_normalize_iniciativas.py",
-    "generated_at": "2026-08-22T05:19:11.419437Z"
+    "generated_at": "2026-08-23T05:20:58.311170Z"
   },
   {
     "table": "iniciativa_autores_deputados",
@@ -4307,9 +4307,9 @@
     "rows": 28861,
     "columns": 9,
     "source_file": "data/raw/17/iniciativas.json",
-    "source_sha256": "43c89a33e4f0865af7f98da7865e852eab81081d0f67c2ca8fa505c131306b45",
+    "source_sha256": "71bc3684ea16898f5c9e8a2fbbabb452be076ce31742f27898c0522f9fc5a2f8",
     "normalizer": "03_normalize_iniciativas.py",
-    "generated_at": "2026-08-22T05:19:11.196983Z"
+    "generated_at": "2026-08-23T05:20:58.083662Z"
   },
   {
     "table": "iniciativa_autores_gp",
@@ -4483,9 +4483,9 @@
     "rows": 1954,
     "columns": 7,
     "source_file": "data/raw/17/iniciativas.json",
-    "source_sha256": "43c89a33e4f0865af7f98da7865e852eab81081d0f67c2ca8fa505c131306b45",
+    "source_sha256": "71bc3684ea16898f5c9e8a2fbbabb452be076ce31742f27898c0522f9fc5a2f8",
     "normalizer": "03_normalize_iniciativas.py",
-    "generated_at": "2026-08-22T05:19:11.210369Z"
+    "generated_at": "2026-08-23T05:20:58.096495Z"
   },
   {
     "table": "iniciativa_eventos",
@@ -4659,9 +4659,9 @@
     "rows": 14866,
     "columns": 27,
     "source_file": "data/raw/17/iniciativas.json",
-    "source_sha256": "43c89a33e4f0865af7f98da7865e852eab81081d0f67c2ca8fa505c131306b45",
+    "source_sha256": "71bc3684ea16898f5c9e8a2fbbabb452be076ce31742f27898c0522f9fc5a2f8",
     "normalizer": "03_normalize_iniciativas.py",
-    "generated_at": "2026-08-22T05:19:11.405231Z"
+    "generated_at": "2026-08-23T05:20:58.296500Z"
   },
   {
     "table": "iniciativa_peticoes",
@@ -4835,9 +4835,9 @@
     "rows": 194,
     "columns": 14,
     "source_file": "data/raw/17/iniciativas.json",
-    "source_sha256": "43c89a33e4f0865af7f98da7865e852eab81081d0f67c2ca8fa505c131306b45",
+    "source_sha256": "71bc3684ea16898f5c9e8a2fbbabb452be076ce31742f27898c0522f9fc5a2f8",
     "normalizer": "03_normalize_iniciativas.py",
-    "generated_at": "2026-08-22T05:19:11.429267Z"
+    "generated_at": "2026-08-23T05:20:58.320728Z"
   },
   {
     "table": "iniciativas",
@@ -5011,9 +5011,9 @@
     "rows": 2119,
     "columns": 30,
     "source_file": "data/raw/17/iniciativas.json",
-    "source_sha256": "43c89a33e4f0865af7f98da7865e852eab81081d0f67c2ca8fa505c131306b45",
+    "source_sha256": "71bc3684ea16898f5c9e8a2fbbabb452be076ce31742f27898c0522f9fc5a2f8",
     "normalizer": "03_normalize_iniciativas.py",
-    "generated_at": "2026-08-22T05:19:11.160202Z"
+    "generated_at": "2026-08-23T05:20:58.048466Z"
   },
   {
     "table": "intervencoes",
@@ -5178,7 +5178,7 @@
     "source_file": "data/raw/17/intervencoes.json",
     "source_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "normalizer": "03_normalize_intervencoes.py",
-    "generated_at": "2026-08-22T05:19:08.838741Z"
+    "generated_at": "2026-08-23T05:20:55.693788Z"
   },
   {
     "table": "orcamento_do_estado",
